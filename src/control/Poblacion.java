@@ -1,6 +1,8 @@
 package control;
 
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Set;
 
 import modelo.empresa.DineroEstado;
 import modelo.poblacion.EstadoSer;
@@ -19,15 +21,15 @@ public class Poblacion {
 	public Poblacion(int menoresInicial, int trabajadoresIncial, int jubiladosInicial) {
 
 		for (int i = 0; i < menoresInicial; i++) {
-			poblacion.add(new Ser(Utilies.obtenerAleatorio(0, 17), this.id, EstadoSer.menor));
+			poblacion.add(new Ser(this.id, Utilies.obtenerAleatorio(0, 17), EstadoSer.menor));
 			this.id++;
 		}
 		for (int i = 0; i < trabajadoresIncial; i++) {
-			poblacion.add(new Ser(Utilies.obtenerAleatorio(18, 65), this.id, EstadoSer.trabajador));
+			poblacion.add(new Ser(this.id, Utilies.obtenerAleatorio(18, 65), EstadoSer.trabajador));
 			this.id++;
 		}
 		for (int i = 0; i < jubiladosInicial; i++) {
-			poblacion.add(new Ser(65, this.id, EstadoSer.jubilado));
+			poblacion.add(new Ser(this.id, 65, EstadoSer.jubilado));
 			this.id++;
 		}
 	}
@@ -37,8 +39,9 @@ public class Poblacion {
 	 * @param tipo
 	 * @return lista con el mismo tipo que la entrada
 	 */
-	public ArrayList<Ser> obtenerSer(EstadoSer tipo) {
-		return poblacion;
+	public ArrayList<Ser> obtenerDemandantes(EstadoSer tipo) {
+		
+		return null;
 
 	}
 
@@ -68,11 +71,11 @@ public class Poblacion {
 	 * @param capital
 	 */
 	public void pagarMenores(DineroEstado capital) {
-
+		
 	}
 
 	public void pagarDemandantes(DineroEstado capital) {
-
+		
 	}
 
 	public void pagarTrabajadores(DineroEstado capital) {
@@ -88,14 +91,25 @@ public class Poblacion {
 	 * @return cantidad de sere de ese tipo
 	 */
 	public int numeroTipoSeres(EstadoSer tipo) {
-		return id;
-
+		int resultado = 0;
+		for (Ser ser : poblacion) {
+			if (ser.getTipoEstado() == tipo) {
+				resultado++;
+			}
+		}
+		return resultado;
 	}
 
 	/**
 	 * envejece a la poblacion 1 año
 	 */
-	public void envejecerPoblacion() {
+	public ArrayList<Ser> envejecerPoblacion() {
+
+		for (int i = 0; i < poblacion.size(); i++) {
+			int edad = poblacion.get(i).getEdad();
+			poblacion.get(i).setEdad(edad++);
+		}
+		return poblacion;
 
 	}
 
@@ -103,19 +117,24 @@ public class Poblacion {
 	 * 
 	 * @param nacimiento
 	 */
-	public void generarMenor(int nacimiento) {
+	public ArrayList<Ser> generarMenor(int nacimiento) {
 
+		for (int i = 0; i < nacimiento; i++) {
+			poblacion.add(new Ser(this.id, 0, EstadoSer.menor));
+			this.id++;
+		}
+		return poblacion;
 	}
 
 	/**
 	 * actualizar la lista de demandantes
 	 * 
-	 * @param genteDespedida(de la sede)
+	 * @param genteDespedida(de
+	 *            la sede)
 	 */
 	public void despedirTrabajador(ArrayList<Integer> genteDespedida) {
 
 	}
-	
 
 	public ArrayList<Ser> getPoblacion() {
 		return poblacion;

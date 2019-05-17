@@ -26,9 +26,11 @@ public class Ser {
 		this.esperanzaVida = Utilies.obtenerAleatorio(this.edad, 90);
 		this.tipoEstado = tipoEstado;
 	}
+	
 
+	
 	public void pagarNVmenor(double sueldo) {
-
+		
 	}
 
 	public void pagarNVtrabajador(double sueldo, DineroEstado dineroEstado) {
@@ -86,4 +88,9 @@ public class Ser {
 	public float getEsperanzaVida() {
 		return esperanzaVida;
 	}
+	
+	public void setEdad(int edad) {
+		this.edad = edad;
+	}
+
 }

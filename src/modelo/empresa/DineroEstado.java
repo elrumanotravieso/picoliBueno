@@ -15,7 +15,7 @@ public class DineroEstado {
 	 * @return el dinero reparte
 	 */
 	public double calcularSueldo(int seres, double sueldo) {
-
+		
 		return sueldo;
 	}
 
